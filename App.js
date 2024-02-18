@@ -5,12 +5,20 @@ import Card from './src/Card';
 import Mytext from './components/MyText/MyText';
 import MyText from './components/MyText/MyText';
 import Item from './components/Item/Item'; 
+import { ThemeContext } from "./contexts/ThemeContext";
+import HomeScreen from "./components/HomeScreen/HomeScreen";
+import App2 from "./App2";
 // import { useState } from 'react';
 
 // export default function App() {
 //   const batteryLevel = useBatteryLevel(); }
 
   const App = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const toggleTheme = () => { 
+      setIsDarkMode(!isDarkMode);
+    }
+
     let array = Array(100).fill(0)
     const scrollViewRef = useRef(null);
 
@@ -27,12 +35,12 @@ import Item from './components/Item/Item';
     return (
       <SafeAreaView>   
         <Button onPress={handleClick} title ={'Scroll to top'} />
-        <ScrollView ref={scrollViewRef}>
+        {/* <ScrollView ref={scrollViewRef}>
           {array.map((value, index) => ( 
           <Text key={index}> Scroll!!! {index} </Text>
           ))}
            
-        </ScrollView>
+        </ScrollView> */}
         <Button onPress={handleClick} title ={'Scroll to top'} />
         
         
@@ -51,7 +59,7 @@ import Item from './components/Item/Item';
         <View 
         style = {{
           position:'relative', 
-          backgroundColor:'yellow',
+          backgroundColor: isDarkMode ? 'black': 'yellow',
           padding:60
           }}> 
          <View 
@@ -111,13 +119,6 @@ import Item from './components/Item/Item';
           top:10,
           left:5,
           right:40,
-  
-          
-  
-          
-        
-  
-          
           
         }}> 
         <Text 
@@ -134,6 +135,9 @@ import Item from './components/Item/Item';
            <MyText/>
            <MyText/>
            <MyText/>
+
+           <App2/>
+
          </View>
        </View> 
   
@@ -144,6 +148,8 @@ import Item from './components/Item/Item';
        <Item name={"keyboard"} price={4500}/>
   
        <View>
+
+        <Button title={"Switch Mode"} onPress={toggleTheme}/>
          <Text style={{fontStyle:'italic',fontWeight:'600'}}>
           All rights reserved.
          </Text>
