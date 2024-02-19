@@ -8,12 +8,14 @@ import Item from './components/Item/Item';
 import { ThemeContext } from "./contexts/ThemeContext";
 import HomeScreen from "./components/HomeScreen/HomeScreen";
 import App2 from "./App2";
+import useToggle from "./customHooks/useToggle";
 // import { useState } from 'react';
 
 // export default function App() {
 //   const batteryLevel = useBatteryLevel(); }
 
   const App = () => {
+    const [isOn, toggleIsOn] = useToggle(false)
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleTheme = () => { 
       setIsDarkMode(!isDarkMode);
@@ -140,7 +142,9 @@ import App2 from "./App2";
 
          </View>
        </View> 
-  
+            <Text>{isOn ? 'ON' : 'OFF'}</Text>
+            <Button title={'Toggle'} onPress={toggleIsOn}/>
+       
        <Item name={"table"} price={5000}/> 
        <Item name={"chair"} price={1000}/> 
        <Item name={"mouse"} price={3500}/> 
