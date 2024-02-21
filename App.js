@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from "react";
 // import { useBatteryLevel } from 'expo-battery';
-import { SafeAreaView, StyleSheet, Text, View, ScrollView,Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView, Button, Image, TextInput } from 'react-native';
 import Card from './src/Card';
 import Mytext from './components/MyText/MyText';
 import MyText from './components/MyText/MyText';
@@ -16,9 +16,13 @@ import useToggle from "./customHooks/useToggle";
 
   const App = () => {
     const [isOn, toggleIsOn] = useToggle(false)
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);   
+     const [imageSource, setImageSource] = useState({uri:'https://example.com'})
+     const [textValue, setTextValue] = useState('')
+
     const toggleTheme = () => { 
       setIsDarkMode(!isDarkMode);
+  
     }
 
     let array = Array(100).fill(0)
@@ -123,6 +127,24 @@ import useToggle from "./customHooks/useToggle";
           right:40,
           
         }}> 
+        <TextInput style={{width:'80%', backgroundColor:'white',borderWidth:1,borderRadius:10 }} 
+        value={textValue}
+        onChangeText={value => {
+          console.log(value)
+          setTextValue(value)
+        }}
+        placeholder={"please enter your name"}
+        autoFocus={true}
+        />
+        <TextInput style={{width:'80%', backgroundColor:'white',borderWidth:1,borderRadius:10 }} 
+        value={textValue}
+        onChangeText={value => {
+          console.log(value)
+          setTextValue(value)
+        }}
+        placeholder={"please enter your name"}
+        autoFocus={true}
+        />
         <Text 
         style={{
           color:'black',
@@ -137,6 +159,22 @@ import useToggle from "./customHooks/useToggle";
            <MyText/>
            <MyText/>
            <MyText/>
+
+           <Image
+          //  source={require('./assets/cake.png')}
+           source={imageSource}
+           style={{width:100 , height:100,backgroundColor:'red'}}
+           resizeMode="contain"
+           onError={() => { 
+            console.log('Error has been detected while loading an image')
+            setImageSource(require('./assets/cake.png'));
+  }}
+           />
+             <Image
+           source={{uri:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1089&q=80'}}
+           style={{width:100 , height:100,backgroundColor:'red'}}
+           resizeMode="contain"
+           />
 
            <App2/>
 
